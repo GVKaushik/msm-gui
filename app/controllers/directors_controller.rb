@@ -56,6 +56,17 @@ class DirectorsController < ApplicationController
   end
 
   def update_director
+    the_id = params.fetch("path_id")
+    matching_directors = Director.where({:id=>the_id})
+    the_director=matching_directors.at(0)
+    the_director.bio = params.fetch("bio_entry") 
+    the_director.dob = params.fetch("dob_entry")
+    the_director.image = params.fetch("image_entry")
+    the_director.name = params.fetch("name_entry")
+    the_director.save
+
+
+    redirect_to("/directors/#{the_director.id}")
   end
 
 
